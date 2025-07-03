@@ -1,0 +1,26 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 480px;
+  background-color: #0d1117;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  z-index: 9999;
+  border-top: 1px solid #222;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nav-item:hover {
+  color: #d2e0e9;
+}

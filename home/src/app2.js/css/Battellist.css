@@ -1,0 +1,91 @@
+.avatar img {
+    width: 40px;
+    border-radius: 50%;
+  }
+  
+  .cash-display {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+  }
+  
+  .cash-amount {
+    margin-left: 5px;
+    color: green;
+  }
+  
+  .battle-list {
+    padding: 20px;
+  }
+  
+  .battle-card {
+    background-color: #FCF7FF;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: .3px solid #ec97a561;
+  }
+
+  .price_pool{
+    color: #d270b985;
+    font-size: 11px;
+  }
+
+  .entry{
+    color: #d270b985;
+    font-size: 12px;
+  }
+
+  .playing_now{
+    color: brown;
+    font-size: 13px;
+  }
+
+  .waiting_now{
+    font-size: 12px;
+  font-weight: bold;
+  }
+
+  .price_span{
+    margin-left: 8px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+ .betcard_buttton{
+  min-width: 65px;
+  background: #42aa42;
+  color: white;
+  padding: 5px 16px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  }
+  
+  .open-battle, .battle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .players {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+  }
+  
+  .prize-pool {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .view-button, .entry-button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
