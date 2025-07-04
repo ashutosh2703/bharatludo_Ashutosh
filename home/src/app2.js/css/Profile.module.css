@@ -19,8 +19,9 @@
 } 
 
 .battle_input_header { 
-    color: rgb(149, 149, 149); 
-    font-size: 0.75em; 
+    color: rgb(255, 255, 255); 
+    font-size: 1em; 
+    font-weight: 700;
     margin-bottom: -5px; 
     margin-top: 5px;
 } 
@@ -65,7 +66,7 @@
 } 
  
 .mytext { 
-    color: rgb(8, 8, 8); 
+    color: rgb(255, 255, 255); 
     font-size: 0.95em; 
     font-weight: 400; 
     line-height: 21px; 
@@ -110,7 +111,7 @@
 }
 
 .moneyBox_header { 
-  color: rgb(149, 149, 149); 
+  color: rgb(0, 0, 0); 
   font-size: 0.6em; 
   font-weight: 500; 
   text-transform: uppercase;

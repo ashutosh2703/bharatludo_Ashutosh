@@ -15,7 +15,7 @@ const Gamerules = () => {
               <strong>Home</strong>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-             <b> MaxwayInfotechLudo Rules </b>
+             <b> Bhrat Ludo Rules </b>
             </li>
           </ol>
         </nav>

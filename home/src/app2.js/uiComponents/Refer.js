@@ -141,7 +141,7 @@ console.log(res.data)
             </picture>
             <div className={`${css.font_9} mx-3`} style={{ width: '63%' }}>
               <div>
-                When your friend signs up on MaxwayInfotechLudo Ludo from your referral link,
+                When your friend signs up on Bharat Ludo Ludo from your referral link,
               </div>
               <div className={`${css.font_8} ${css.c_green} mt-2`}>
                 You get 2 % Commission on your referral's winnings.

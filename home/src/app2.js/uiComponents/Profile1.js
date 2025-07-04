@@ -58,6 +58,7 @@ const Profile1 = () => {
       });
   };
   const UserALL = () => {
+    console.log(baseUrl,"base_url")
     let access_token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -253,7 +254,6 @@ const Profile1 = () => {
               />
               <picture>
                 {/* {image} */}
-                {console.log(process.env.PUBLIC_URL)}
                 {profile && profile.avatar ? (
                   <img
                     height="80px"
@@ -278,7 +278,7 @@ const Profile1 = () => {
             </span>
             <div
               className={`text-bold my-3 ${portcss} font-weight-bold `}
-              style={{ fontSize: "1em" }}
+              style={{ fontSize: "1em" ,color:"white"}}
             >
               {profile && profile.Name}
               <img
@@ -332,7 +332,7 @@ const Profile1 = () => {
         </div>
         {/* <div className={css.divider_x}></div> */}
         <center>
-          <div className="p-3" style={{ background: '#F8FA8C', border: "1px solid black", borderRadius: "20px", marginTop: "0.5rem" }}>
+          <div className="p-3" style={{ background: '#fd9a20', border: "1px solid black", borderRadius: "20px", marginTop: "0.5rem" }}>
             <Link
               className={`${css.profile_wallet} d-flex align-items-center`}
               style={{ width: "90%" }}
@@ -348,7 +348,7 @@ const Profile1 = () => {
               <div className={`${css.mytext} ml-5`}>My Wallet</div>
             </Link>
           </div>
-          <div className="p-3" style={{ background: '#F8FA8C', border: "1px solid black", borderRadius: "20px", marginTop: "0.5rem" }}>
+          <div className="p-3" style={{ background: '#fd9a20', border: "1px solid black", borderRadius: "20px", marginTop: "0.5rem" }}>
             <div className={css.text_bold}>
               Complete Profile
             </div>
@@ -550,7 +550,7 @@ const Profile1 = () => {
         <div className="p-3 snipcss-A1eLC snip-div">
           <Link
             to="/login"
-            className={`${css.center_xy}  text-uppercase py-3 font-weight-bolder text-muted`}
+            className={`${css.center_xy}  text-uppercase py-3 font-weight-bolder `}
             onClick={(e) => logout(e)}
             style={{ backgroundColor: "black", color: "white", width: "10rem", margin: "auto", borderRadius: "15px" }}
           >

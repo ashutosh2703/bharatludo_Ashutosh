@@ -288,6 +288,7 @@ router.post("/settings", upload.fields([
         updatesetting.CompanyEmail = req.body.CompanyEmail;
         updatesetting.CompanyWebsite = req.body.CompanyWebsite;
         updatesetting.homeMsg = req.body.homeMsg;
+        updatesetting.note = req.body.note;
         updatesetting.gameMsg = req.body.gameMsg;
         updatesetting.withdrawMsg = req.body.withdrawMsg;
         updatesetting.depositMsg = req.body.depositMsg;

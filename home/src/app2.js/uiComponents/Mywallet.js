@@ -49,7 +49,7 @@ const Mywallet = () => {
         <div className="main_area" style={{ paddingTop: "14%" }}>
           <div
             className="p-4"
-            style={{ border: "1px solid #e0e0e0", backgroundColor: "#F8FA8C", borderRadius: "5px" }}
+            style={{ border: "1px solid #e0e0e0", borderRadius: "5px" }}
           >
             <Link
               className={`d-flex align-items-center ${css.profile_wallet} undefined`}
@@ -73,9 +73,9 @@ const Mywallet = () => {
         <div
           className={`${css.divider_x} XXsnipcss_extracted_selector_selectionXX snipcss0-0-0-1 tether-target-attached-top tether-abutted tether-abutted-top tether-element-attached-top tether-element-attached-center tether-target-attached-center`}
         ></div>
-        <div className="p-4" style={{ backgroundColor: "#F8FA8C" }}>
+        <div className="p-4" style={{}}>
           <div className="" style={{ border: "1px solid gray", borderRadius: "8px" , marginBottom:"20px"}}>
-            <div className="" style={{ background: "#05687d", padding: "0.2rem", textAlign: "center",border: "1px solid gray", borderRadius: "8px" }}>
+            <div className="" style={{ background: "#05687d", padding: "0.2rem",color:"white", textAlign: "center",border: "1px solid gray", borderRadius: "8px" }}>
               <span>Deposit Chips</span>
             </div>
             <div className={css.wallet_card}>
@@ -120,7 +120,7 @@ const Mywallet = () => {
           </div>
 
           <div className="" style={{ border: "1px solid gray", borderRadius: "8px" , marginBottom:"40px"}}>
-            <div className="" style={{ background: "#05687d", padding: "0.2rem", textAlign: "center",border: "1px solid gray", borderRadius: "8px" }}>
+            <div className="" style={{ background: "#05687d",color:"white", padding: "0.2rem", textAlign: "center",border: "1px solid gray", borderRadius: "8px" }}>
               <span>Winning Chips</span>
             </div>
             <div className={css.wallet_card2}>

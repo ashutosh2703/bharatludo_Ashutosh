@@ -902,7 +902,7 @@ const copyCode = (e) => {
                         ></input>
                       </div>
                     </div>
-                    <span className="MuiFormHelperText-root" style={{ display: 'block',  fontSize: '1.2rem', padding: '0rem 0.5rem 1rem'}}>Min: 10, Max: 10000</span>
+                    <span className="MuiFormHelperText-root" style={{ display: 'block',  fontSize: '1.2rem', padding: '0rem 0.5rem 1rem'}}>Min: 10, Max: 50000</span>
                   </div>
                 </div>
                 <div className={`${css.games_window}`}>

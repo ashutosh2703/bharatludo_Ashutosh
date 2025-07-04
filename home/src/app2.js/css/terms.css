@@ -80,10 +80,10 @@ b {
 } 
 
 a{
-    color: #007bff !important;
+    color: #000205 ;
 }
 a:hover{
-    color: #007bff !important;
+    color: #fdfdfd !important;
 }
 
 .breadcrumb {
