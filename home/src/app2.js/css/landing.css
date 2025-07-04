@@ -269,7 +269,7 @@ a:hover {
 }
 
 a {
-    color: #000306 !important;
+    color: #000306 ;
     text-decoration: none;
     background-color: transparent;
 }
@@ -286,7 +286,7 @@ a {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #008CBA;
+    background-color: #ffffff;
 }
 
 .text {
@@ -358,8 +358,10 @@ a {
   line-height: 17px;
   padding: 8px;
   text-align: center;
-  width: 480px;
+  width: 100%;
+  max-width: 480px;
   z-index: 9999;
+  box-sizing: border-box;
 }
 
 

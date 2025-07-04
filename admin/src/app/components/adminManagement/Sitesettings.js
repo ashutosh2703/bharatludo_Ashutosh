@@ -29,6 +29,11 @@ export const Sitesettings = () => {
   // const [version, setVersion] = useState("");
   const [settingId, setSettingId] = useState("");
   
+  // Social Media States (using your existing field names)
+  const [whatsapp_link, setWhatsappLink] = useState("");
+  const [facebook_link, setFacebookLink] = useState("");
+  const [telegram_link, setTelegramLink] = useState("");
+  
   // State for carousel images
   // const [CarouselImage1, setCarouselImage1] = useState("");
   // const [CarouselImage2, setCarouselImage2] = useState("");
@@ -40,71 +45,53 @@ export const Sitesettings = () => {
   const baseUrl = nodeMode === "development" ? beckendLocalApiUrl : beckendLiveApiUrl;
 
   useEffect(() => {
+    // Fetch main settings
     axios.get(baseUrl + "settings/data", {}).then((res) => {
       console.log(res.data);
       setSettingId(res.data._id || '');
       setWebTitle(res.data.WebTitle);
       setWebName(res.data.WebsiteName);
-      // setCompanyName(res.data.CompanyName);
-      // setCompanyAddress(res.data.CompanyAddress);
-      // setCompanyMobile(res.data.CompanyMobile);
-      // setCompanyEmail(res.data.CompanyEmail);
-      // setCompanyWebsite(res.data.CompanyWebsite);
-      // setHomeMsg(res.data.homeMsg);
-      // setGameMsg(res.data.gameMsg);
-      // setWithdrawMsg(res.data.withdrawMsg);
-      // setDepositMsg(res.data.depositMsg);
-      // setLogo(res.data.Logo);
-      // setSmallLogo(res.data.SmallLogo);
-      // setLandingImage1(res.data.LandingImage1);
-      // setLandingImage2(res.data.LandingImage2);
-      // setLandingImage3(res.data.LandingImage3);
-      // setLandingImage4(res.data.LandingImage4);
-      // issetLandingImage1(res.data.isLandingImage1);
-      // issetLandingImage2(res.data.isLandingImage2);
-      // issetLandingImage3(res.data.isLandingImage3);
-      // issetLandingImage4(res.data.isLandingImage4);
-      // setVersion(res.data.version);
       setNote(res.data.note);
+    });
+
+    // Fetch link settings
+    axios.get(baseUrl + "link-settings/data", {}).then((res) => {
+      console.log("Link settings:", res.data);
+      setWhatsappLink(res.data.whatsapp_link || '');
+      setFacebookLink(res.data.facebook_link || '');
+      setTelegramLink(res.data.telegram_link || '');
+    }).catch((err) => {
+      console.log("Error fetching link settings:", err);
     });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Submit main settings
     let formData = new FormData();
     formData.append("settingId", settingId);
     formData.append("WebTitle", WebTitle);
     formData.append("WebsiteName", WebsiteName);
     formData.append("note", Note);
-    // formData.append("CompanyName", CompanyName);
-    // formData.append("CompanyAddress", CompanyAddress);
-    // formData.append("CompanyMobile", CompanyMobile);
-    // formData.append("CompanyEmail", CompanyEmail);
-    // formData.append("CompanyWebsite", CompanyWebsite);
-    // formData.append("homeMsg", homeMsg);
-    // formData.append("depositMsg", depositMsg);
-    // formData.append("withdrawMsg", withdrawMsg);
-    // formData.append("gameMsg", gameMsg);
-    // formData.append("Logo", Logo);
-    // formData.append("SmallLogo", SmallLogo);
-    // formData.append("LandingImage1", LandingImage1);
-    // formData.append("LandingImage2", LandingImage2);
-    // formData.append("LandingImage3", LandingImage3);
-    // formData.append("LandingImage4", LandingImage4);
-    // formData.append("isLandingImage1", isLandingImage1);
-    // formData.append("isLandingImage2", isLandingImage2);
-    // formData.append("isLandingImage3", isLandingImage3);
-    // formData.append("isLandingImage4", isLandingImage4);
-    // formData.append("CarouselImage1", CarouselImage1);
-    // formData.append("CarouselImage2", CarouselImage2);
-    // formData.append("CarouselImage3", CarouselImage3);
-    // formData.append("version", version);
+    
     const response = await axios.post(baseUrl + "settings", formData);
     console.log(response.data.status);
-    if (response.data.status === 'success') {
-      alert("Settings submitted successfully");
+    
+    // Submit social media links
+    const linkData = {
+      whatsapp_link: whatsapp_link,
+      facebook_link: facebook_link,
+      telegram_link: telegram_link
+    };
+    
+    const linkResponse = await axios.post(baseUrl + "add-link", linkData);
+    console.log("Link response:", linkResponse.data);
+    
+    if (response.data.status === 'success' && linkResponse.data === true) {
+      alert("Settings and social links submitted successfully");
     } else {
-      alert("Settings Not Submitted");
+      alert("Settings submitted but there might be an issue with social links");
     }
   };
 
@@ -204,6 +191,43 @@ export const Sitesettings = () => {
               type="text"
               value={Note}
               onChange={(e) => setNote(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <h4 className="text-uppercase font-weight-bold my-3 text-light">Social Media Settings</h4>
+        
+        <div className="form-row">
+          <div className="form-group col-md-4">
+            <label htmlFor="facebook_link">Facebook URL</label>
+            <input
+              className="form-control"
+              type="text"
+              value={facebook_link}
+              onChange={(e) => setFacebookLink(e.target.value)}
+              placeholder="https://facebook.com/yourpage"
+            />
+          </div>
+          
+          <div className="form-group col-md-4">
+            <label htmlFor="telegram_link">Telegram URL</label>
+            <input
+              className="form-control"
+              type="text"
+              value={telegram_link}
+              onChange={(e) => setTelegramLink(e.target.value)}
+              placeholder="https://t.me/yourgroup"
+            />
+          </div>
+          
+          <div className="form-group col-md-4">
+            <label htmlFor="whatsapp_link">WhatsApp Link</label>
+            <input
+              className="form-control"
+              type="text"
+              value={whatsapp_link}
+              onChange={(e) => setWhatsappLink(e.target.value)}
+              placeholder="https://wa.me/1234567890"
             />
           </div>
         </div>

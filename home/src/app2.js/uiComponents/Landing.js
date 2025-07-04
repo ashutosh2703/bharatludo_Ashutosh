@@ -153,7 +153,6 @@ export default function Landing() {
             </div>
           </div> */}
           <div className="note-box">
-            {console.log(WebSitesettings,"dataaaaaaaaaaaaaaaaa")}
             {WebSitesettings?.note || (
               <>
                 <span role="img" aria-label="note">🚫 Note 🚫 👉</span>
@@ -196,7 +195,7 @@ export default function Landing() {
                   className="gameCard-container"
                   to={`/Homepage/Ludo%20Classics%20Lite`}
                 >
-                  <span className="d-none blink  d-block text-right">
+                  <span className="d-none blink  d-block text-right" style={{color:"white"}}>
                     ◉ LIVE Min.50 Max.50k
                   </span>
                   <picture className="gameCard-image">
@@ -224,7 +223,7 @@ export default function Landing() {
                   // to='/yodhaContaxt'
                   to={`/Homepage/Ludo%20Classics%20Pro`}
                 >
-                  <span className="d-none blink  d-block text-right">
+                  <span className="d-none blink  d-block text-right" style={{color:"white"}}>
                     ◉ Live
                   </span>
                   <picture className="gameCard-image">
@@ -253,8 +252,8 @@ export default function Landing() {
                   className="gameCard-container"
                   onClick={() => { handleGameClick('Owner') }}
                 >
-                  <span className="d-none blink  d-block text-right">
-                    ◉ comming soon
+                  <span className="d-none blink  d-block text-right" style={{color:"white"}}>
+                    ◉ Live
                   </span>
                   <picture className="gameCard-image">
                     <img
@@ -282,7 +281,7 @@ export default function Landing() {
                     window.open('https://wa.me/916263925602?text=Hi%20I%20need%20support', '_blank');
                   }}
                 >
-                  <span className="d-none blink  d-block text-right">
+                  <span className="d-none blink  d-block text-right" style={{color:"white"}}>
                     ◉ Live
                   </span>
                   <picture className="gameCard-image">

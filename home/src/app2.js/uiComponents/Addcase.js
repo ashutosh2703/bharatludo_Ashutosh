@@ -898,7 +898,7 @@ const copyCode = (e) => {
                           id="amountInput"
                           style={{ width: "100%", fontSize: '2em', background: 'transparent'}}
                           value={`${global}`}
-                          onChange={(e) => { (e.target.value > 0) ? (e.target.value <= 10000) ? setGlobal(parseInt(e.target.value)) : (setGlobal(10000)) : (e.target.value < 0) ? setGlobal(10) : setGlobal(0) }}
+                          onChange={(e) => { (e.target.value > 0) ? (e.target.value <= 50000) ? setGlobal(parseInt(e.target.value)) : (setGlobal(50000)) : (e.target.value < 0) ? setGlobal(10) : setGlobal(0) }}
                         ></input>
                       </div>
                     </div>

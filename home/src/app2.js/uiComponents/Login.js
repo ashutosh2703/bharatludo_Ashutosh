@@ -531,7 +531,7 @@ export default function Login() {
                             <img src={loginss} alt="Logo" />
                         </div>
 
-                        <div className="login-title">Sign in</div>
+                        <div className="login-title" style={{color:"black"}}>Sign in</div>
 
                         <div className="input-container">
                             <div className="input-group">
@@ -601,7 +601,7 @@ export default function Login() {
                     </div>
 
                     <div className="login-footer">
-                        By continuing I agree that Bharat Ludo. may store and process my data in accordance with the <Link to="/term-condition">Terms of Use</Link>, <Link to="/PrivacyPolicy">Privacy Policy</Link> and that I am 18 years or older. I am not playing from
+                        By continuing I agree that Bharat Ludo. may store and process my data in accordance with the <Link to="/term-condition" >Terms of Use</Link>, <Link to="/PrivacyPolicy">Privacy Policy</Link> and that I am 18 years or older. I am not playing from
                         Assam, Odisha, Nagaland, Sikkim, Meghalaya, Andhra Pradesh, or Telangana.
                     </div>
                 </div>
