@@ -1445,7 +1445,7 @@ router.post("/login/admin", async (req, res) => {
     console.log(phone);
     
     try {
-        let user = await User.find({ Phone: phone, user_type: "Admin"});
+        let user = await User.findOne({ Phone: phone, user_type: "Admin"});
         if (!user) {
             user = await User.findOne({ Phone: phone, user_type: "Agent" });
         }
