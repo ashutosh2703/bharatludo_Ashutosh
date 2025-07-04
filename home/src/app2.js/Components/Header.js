@@ -453,6 +453,9 @@ const Header = ({ user, loggedIn }) => {
                   />
                 </picture>
               </Link>
+              <div className="">
+                  <Downloadbutton />
+                </div>
 
               <div className={`ml-5`}>
 
