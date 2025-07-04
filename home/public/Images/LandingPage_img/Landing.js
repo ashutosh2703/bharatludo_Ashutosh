@@ -82,7 +82,7 @@ export default function Landing() {
     <>
      
     
-      <div className="leftContainer">
+      <div className="leftContainer" >
       
         <div className="main-area" style={{ paddingTop: "65px" }}>
         
@@ -260,7 +260,7 @@ export default function Landing() {
                       width="100%"
                       src={
                         process.env.PUBLIC_URL +
-                        "/Images/LandingPage_img/manualGame.jpeg"
+                        "/Images/LandingPage_img/1.jpg"
                       }
                       alt=""
                     />
@@ -499,7 +499,7 @@ export default function Landing() {
               <div className="footer-text-bold">About Us</div>
               <br />
               <div className="footer-text">
-                {WebSitesettings ? WebSitesettings.WebsiteName : "MaxwayInfotechLudo"} is a
+                {WebSitesettings ? WebSitesettings.WebsiteName : "Bharat Ludo"} is a
                 real-money gaming product owned and operated by{" "}
                 {WebSitesettings ? WebSitesettings.CompanyName : " "} ("
                 {WebSitesettings ? WebSitesettings.WebsiteName : " "}" or "We"

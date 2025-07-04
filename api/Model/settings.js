@@ -180,6 +180,9 @@ const SiteSettingsSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    note:{
+        type: String,
+    },
     version: {
         type: String,
         default: null

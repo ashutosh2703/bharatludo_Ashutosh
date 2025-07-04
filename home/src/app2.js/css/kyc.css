@@ -96,7 +96,7 @@ transform: translateZ(0)!important;
 }
 
 a{
-    color: #fff !important;
+    color: #fff;
     text-decoration: none;
 }
 a:hover{

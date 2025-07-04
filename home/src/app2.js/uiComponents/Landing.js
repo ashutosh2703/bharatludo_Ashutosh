@@ -153,11 +153,17 @@ export default function Landing() {
             </div>
           </div> */}
           <div className="note-box">
-            <span role="img" aria-label="note">🚫 Note 🚫 👉</span>
-            Please जिस टाइम में जो UPI & Account number लगेंगे उसी पर पेमेंट करें अन्यथा डिपॉजिट ऐड नहीं होगा। withdrawal की कोई समस्या नहीं है।
-            <span role="img" aria-label="note">🚫 Note 👉</span>
-            Refer की समस्या का समाधान हो चुका है आगे से कोई Problem नहीं आएगी Thankyou 🙏🙏🥰
+            {console.log(WebSitesettings,"dataaaaaaaaaaaaaaaaa")}
+            {WebSitesettings?.note || (
+              <>
+                <span role="img" aria-label="note">🚫 Note 🚫 👉</span>
+                Please जिस टाइम में जो UPI & Account number लगेंगे उसी पर पेमेंट करें अन्यथा डिपॉजिट ऐड नहीं होगा। withdrawal की कोई समस्या नहीं है।
+                <span role="img" aria-label="note">🚫 Note 👉</span>
+                Refer की समस्या का समाधान हो चुका है आगे से कोई Problem नहीं आएगी Thankyou 🙏🙏🥰
+              </>
+            )}
           </div>
+
 
 
           <section className="games-section p-3">
@@ -190,7 +196,7 @@ export default function Landing() {
                   className="gameCard-container"
                   to={`/Homepage/Ludo%20Classics%20Lite`}
                 >
-                  <span className="d-none blink text-primary d-block text-right">
+                  <span className="d-none blink  d-block text-right">
                     ◉ LIVE Min.50 Max.50k
                   </span>
                   <picture className="gameCard-image">
@@ -198,16 +204,16 @@ export default function Landing() {
                       width="100%"
                       src={
                         process.env.PUBLIC_URL +
-                        "/Images/LandingPage_img/manualGame.png"
+                        "/Images/LandingPage_img/manualGame.jpg"
                       }
                       alt=""
                     />
                   </picture>
-                  <div className="gameCard-title">
-                    {/* <span className="d-none text-dark d-block text-right">
+                  {/* <div className="gameCard-title">
+                    <span className="d-none text-dark d-block text-right">
                       ◉ Manual Ludo Classic
-                    </span> */}
-                  </div>
+                    </span>
+                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
@@ -215,11 +221,11 @@ export default function Landing() {
                 {/*/Homepage/Ludo%20Classics%20Pro*/}
                 <Link
                   className="gameCard-container"
-                  to='/yodhaContaxt'
-                // to={`/Homepage/Ludo%20Classics%20Pro`}
+                  // to='/yodhaContaxt'
+                  to={`/Homepage/Ludo%20Classics%20Pro`}
                 >
-                  <span className="d-none blink text-primary d-block text-right">
-                    ◉ Comming soon
+                  <span className="d-none blink  d-block text-right">
+                    ◉ Live
                   </span>
                   <picture className="gameCard-image">
                     <img
@@ -231,11 +237,11 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  <div className="gameCard-title">
-                    {/* <span className="d-none text-dark d-block text-right">
+                  {/* <div className="gameCard-title">
+                    <span className="d-none text-dark d-block text-right">
                       ◉  Yodha Ludo
-                    </span> */}
-                  </div>
+                    </span>
+                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
@@ -247,7 +253,7 @@ export default function Landing() {
                   className="gameCard-container"
                   onClick={() => { handleGameClick('Owner') }}
                 >
-                  <span className="d-none blink text-primary d-block text-right">
+                  <span className="d-none blink  d-block text-right">
                     ◉ comming soon
                   </span>
                   <picture className="gameCard-image">
@@ -260,11 +266,11 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  <div className="gameCard-title">
-                    {/* <span className="d-none text-dark d-block text-right">
+                  {/* <div className="gameCard-title">
+                    <span className="d-none text-dark d-block text-right">
                       ◉ KhelBro Ludo
-                    </span> */}
-                  </div>
+                    </span>
+                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
@@ -272,9 +278,11 @@ export default function Landing() {
                 {/*/Homepage/Ludo%20Classics%20Pro*/}
                 <Link
                   className="gameCard-container"
-                  onClick={() => { handleGameClick('Classic') }}
+                  onClick={() => {
+                    window.open('https://wa.me/916263925602?text=Hi%20I%20need%20support', '_blank');
+                  }}
                 >
-                  <span className="d-none blink text-primary d-block text-right">
+                  <span className="d-none blink  d-block text-right">
                     ◉ Live
                   </span>
                   <picture className="gameCard-image">
@@ -287,11 +295,11 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  <div className="gameCard-title">
-                    {/* <span className="d-none text-dark d-block text-right">
+                  {/* <div className="gameCard-title">
+                    <span className="d-none text-dark d-block text-right">
                       ◉  Ludo Classic
-                    </span> */}
-                  </div>
+                    </span>
+                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
@@ -306,8 +314,11 @@ export default function Landing() {
             <hr></hr>
 
           </section>
+          <br /><br />
+          <br /><br />
+          <br /><br />
 
-          <section className="footer">
+          {/* <section className="footer">
             <div className="footer-divider" />
             <div className="">
               <a
@@ -435,9 +446,9 @@ export default function Landing() {
 
                   !
                 </div>
-              </div> */}
+              </div> 
             </div>
-          </section>
+          </section> */}
           {/* <div className="downloadButton">
             <Downloadbutton />
           </div> */}

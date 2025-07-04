@@ -1,5 +1,5 @@
 .headerContainer, .leftContainer {
-    background-color: #000000;
+    /* background-color: #000000; */
     max-width: 480px;
     width: 100%;
 
@@ -16,7 +16,8 @@
 .leftContainer {
     min-height: 0%;
     position: relative;
-    background: #F8FA8C;
+    /* background: url(../../../public/Images/LandingPage_img/homepage%20background.png); */
+    background: #fd8a20;
     color: rgb(0, 0, 0);
 }
 
@@ -122,7 +123,7 @@
 
 
 .games-section {
-    background: #F8FA8C;
+    /* background: #F8FA8C; */
     border-radius: 0;
     position: relative;
     width: 100%;
@@ -133,7 +134,7 @@
 }
 
 .games-section-headline {
-    color: #959595;
+    color: #000000;
     font-size: .75em;
     font-weight: 400;
     line-height: 18px;
@@ -268,7 +269,7 @@ a:hover {
 }
 
 a {
-    color: #007bff !important;
+    color: #000306 !important;
     text-decoration: none;
     background-color: transparent;
 }
