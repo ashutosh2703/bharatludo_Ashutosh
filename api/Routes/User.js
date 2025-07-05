@@ -1776,7 +1776,7 @@ router.post('/block/user/:id', Auth, async (req, res) => {
 router.get('/website/setting', async (req, res) => {
     const paymentGateway = await GatewaySettings.findOne();
     
-    //console.log('gatway RazorPayKey',paymentGateway.RazorPayKey);
+    console.log('gatway RazorPayKey',paymentGateway);
     //console.log('gatway RazorPaySecretKey',paymentGateway.RazorPaySecretKey);
     //console.log('gatway AccountName',paymentGateway.AccountName);
     const webSetting = {
@@ -1788,7 +1788,7 @@ router.get('/website/setting', async (req, res) => {
         'isManualUPIQR': 'public/krludo.jpg', //paymentGateway.QRcode,
         'isManualUPIid': '', //paymentGateway.QRcode,
         'isUpiGatewayActive':false,
-        'isMypayActive':paymentGateway.RazorDeposit,
+        'isMypayActive':paymentGateway?.RazorDeposit,
     
         'isManualPayoutActive':false,
         'isManualBankPayoutActive':false,
@@ -1797,13 +1797,13 @@ router.get('/website/setting', async (req, res) => {
         'isDecentroPayoutActive': false,//paymentGateway.decentroPayout,
         'maxAutopayAmt':1500,
         'isMypayPayoutActive': false,//paymentGateway.decentroPayout,
-        'isMypayPayoutBankActive': paymentGateway.RazorPayout,//paymentGateway.RazorPayout,
+        'isMypayPayoutBankActive': paymentGateway?.RazorPayout,//paymentGateway.RazorPayout,
 
         'RazorPayKey':'*************',
         'RazorPaySecretKey':'888888888',
         'AccountName':'KrLudo',//paymentGateway.AccountName,
 
-        'isDecentroPayoutAuto': paymentGateway.RazorpayAuto, //paymentGateway.decentroAuto,
+        'isDecentroPayoutAuto': paymentGateway?.RazorpayAuto, //paymentGateway.decentroAuto,
         'isRazorPayPayoutAuto':false, //paymentGateway.RazorpayAuto,
         }
         //console.log('webSetting ',webSetting);
