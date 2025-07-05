@@ -117,8 +117,8 @@ const Kyc2 = ({ user }) => {
   return (
     <div>
       <div className="leftContainer">
-        <div className="kycPage mt-5 py-4 px-3">
-          <p className="mt-2" style={{ color: "rgb(149, 149, 149)" }}>
+        <div className="kycPage mt-4 py-4 px-3">
+          <p className="" style={{}}>
             You need to submit a document that shows that you are{" "}
             <span style={{ fontWeight: 500 }}>above 18 years</span> of age and
             not a resident of{" "}
@@ -131,7 +131,7 @@ const Kyc2 = ({ user }) => {
           {/* <div>
             <span style={{ fontSize: "1.5em" }}>Step 2</span> of 3
           </div> */}
-          <p className="mt-2" style={{ color: "rgb(149, 149, 149)" }}>
+          <p className="mt-2" style={{ }}>
             Enter details of Aadhar Card:{" "}
             {/* <span style={{ fontWeight: 500 }}>098765432212</span> */}
           </p>
@@ -147,18 +147,20 @@ const Kyc2 = ({ user }) => {
                   value={Name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  className="white-placeholder"
                 />
               </div>
               {/* <br /> */}
               <div className="kyc-doc-input mt-4">
                 <div className="label">Email Id</div>
                 <input
-                  type="text"
+                  type="email"
                   name="Email"
                   placeholder="Email Id"
                   value={Email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="white-placeholder"
                 />
               </div>
               <div className="kyc-doc-input mt-4">
@@ -170,6 +172,7 @@ const Kyc2 = ({ user }) => {
                   value={DOB}
                   onChange={(e) => setDob(e.target.value)}
                   required
+                  className="white-placeholder"
                 />
               </div>
               <div className="kyc-doc-input mt-4">
@@ -180,6 +183,7 @@ const Kyc2 = ({ user }) => {
                   placeholder=" Aadhar Number"
                   onChange={(e) => setNumber(e.target.value)}
                   required
+                  className="white-placeholder"
                 />
               </div>
               <div className={`${css.doc_upload} mt-4`}>
@@ -189,6 +193,7 @@ const Kyc2 = ({ user }) => {
                   type="file"
                   accept="image/*"
                   required
+                  className="white-placeholder"
                 />
                 {!frontLoaded && (
                   <div className="cxy flex-column position-absolute ">

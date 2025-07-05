@@ -85,7 +85,6 @@ const userSchema = new mongoose.Schema({
     referral_wallet: {
         type: Number,
         default: 0
-
     },
     holder_name: {
         type: String,

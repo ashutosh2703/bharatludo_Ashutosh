@@ -330,112 +330,109 @@ function maskNumber(number) {
 // })
 
 router.post("/aadharcard", Auth, upload.fields([{ name: 'front', maxCount: 1 }, { name: 'back', maxCount: 1 }]), async (req, res) => {
-
-    const { Name, Email, DOB, Gender, Number, Address, verified } = req.body
+    const { Name, Email, DOB, Gender, Number, Address, verified } = req.body;
+    console.log(req.body, "body");
+    
     var Adharfront;
     var Adharback;
+    
     try {
-
-        if(typeof req.files.front !== 'undefined'){
-
-            fs.access("public/kycdoc", (error) => {
-                if (error) {
-                  fs.mkdirSync("public/kycdoc");
-                }
-              });
-              const { buffer, originalname } = req.files.front[0];
-               const uniqueSuffix = Date.now() + "-1-" + Math.round(Math.random() * 1e9);
-                   
-              const ref = `${uniqueSuffix}.webp`;
-            //   console.log(buffer);
-              await sharp(buffer)
-                .webp({ quality: 20 })
-                .toFile("public/kycdoc/" + ref);
-
-             Adharfront= "public/kycdoc/" + ref 
-            // data.front= req.files.front[0].path;
-        }
-
-
-        if(typeof req.files.back !== 'undefined'){
-
-            fs.access("public/kycdoc", (error) => {
-                if (error) {
-                  fs.mkdirSync("public/kycdoc");
-                }
-              });
-              const { buffer, originalname } = req.files.back[0];
-               const uniqueSuffix1 = Date.now() + "-2-" + Math.round(Math.random() * 1e9);
-                   
-              const ref = `${uniqueSuffix1}.webp`;
-            //   console.log(buffer);
-              await sharp(buffer)
-                .webp({ quality: 20 })
-                .toFile("public/kycdoc/" + ref);
-                 Adharback = "public/kycdoc/" + ref 
-            // data.back= req.files.back[0].path;
-        }
-
-        let data = await AadharCard.findOne({ User: req.user.id })
-        
-        if (data && data.verified === "verified") {
-            return res.send({ msg: false })
-        }
-        
-        if (data && data.verified === "unverified") {
+        // Handle front image upload
+        if (typeof req.files.front !== 'undefined') {
+            // Create directory if it doesn't exist (with recursive option)
+            if (!fs.existsSync("public/kycdoc")) {
+                fs.mkdirSync("public/kycdoc", { recursive: true });
+            }
             
+            const { buffer, originalname } = req.files.front[0];
+            const uniqueSuffix = Date.now() + "-1-" + Math.round(Math.random() * 1e9);
+            const ref = `${uniqueSuffix}.webp`;
+            
+            await sharp(buffer)
+                .webp({ quality: 20 })
+                .toFile("public/kycdoc/" + ref);
+            Adharfront = "public/kycdoc/" + ref;
+        }
+        
+        // Handle back image upload
+        if (typeof req.files.back !== 'undefined') {
+            // Create directory if it doesn't exist (with recursive option)
+            if (!fs.existsSync("public/kycdoc")) {
+                fs.mkdirSync("public/kycdoc", { recursive: true });
+            }
+            
+            const { buffer, originalname } = req.files.back[0];
+            const uniqueSuffix1 = Date.now() + "-2-" + Math.round(Math.random() * 1e9);
+            const ref = `${uniqueSuffix1}.webp`;
+            
+            await sharp(buffer)
+                .webp({ quality: 20 })
+                .toFile("public/kycdoc/" + ref);
+            Adharback = "public/kycdoc/" + ref;
+        }
+        
+        // Find existing Aadhar card data
+        let data = await AadharCard.findOne({ User: req.user.id });
+        
+        // If already verified, return false
+        if (data && data.verified === "verified") {
+            return res.send({ msg: false });
+        }
+        
+        // If unverified, update the existing record
+        if (data && data.verified === "unverified") {
             data.Name = Name;
             data.Number = Number;
             data.DOB = DOB;
-            data.verified= "pending";
-            data.front=Adharfront;
-            data.back=Adharback;
+            data.verified = "pending";
+            if (Adharfront) data.front = Adharfront;
+            if (Adharback) data.back = Adharback;
             
-            data.save();
-
+            await data.save();
+            
             const user = await User.findById(data.User);
-            
             user.holder_name = Name;
             user.Email = Email;
             user.verified = 'pending';
-            user.save();
+            await user.save();
             
-            return res.send(data)
-            
+            return res.send(data);
         }
         
+        // If pending, return false
         if (data && data.verified === "pending") {
-            return res.send({ msg: false })
+            return res.send({ msg: false });
         }
-
-        dataNew = new AadharCard({
+        
+        // Create new Aadhar card record
+        const dataNew = new AadharCard({
             Name,
             verified: "pending",
             DOB,
             Gender,
             Number,
             Address,
-            front:Adharfront,
+            front: Adharfront,
             back: Adharback,
             User: req.user.id,
-            
-        })
-        dataNew.save();
+        });
         
+        await dataNew.save();
+        
+        // Update user record
         const userNew = await User.findById(dataNew.User);
-
         userNew.holder_name = Name;
         userNew.Email = Email;
         userNew.verified = 'pending';
-        userNew.save();
+        await userNew.save();
         
-        return res.send(dataNew)
+        return res.send(dataNew);
+        
+    } catch (e) {
+        console.log("Error:", e);
+        res.status(500).send({ error: "Internal server error", details: e.message });
     }
-    catch (e) {
-        res.send(e)
-        // console.log(e);
-    }
-})
+});
 
 
 router.get("/aadharcard/:id", Auth, async (req, res) => {
