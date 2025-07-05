@@ -3,7 +3,7 @@ import React, { useEffect, Profiler, useState } from 'react'
 import "./Component-css/Downloadbutton.css?v=0.1"
 // let deferredPrompt; 
 const Downloadbutton = () => {
-     const [supportsPWA, setSupportsPWA] = useState(false);
+     const [supportsPWA, setSupportsPWA] = useState(true);
   const [promptInstall, setPromptInstall] = useState(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Downloadbutton = () => {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
-    return () => window.removeEventListener("transitionend", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const onClick = evt => {

@@ -499,7 +499,7 @@ export default function Landing() {
               <div className="footer-text-bold">About Us</div>
               <br />
               <div className="footer-text">
-                {WebSitesettings ? WebSitesettings.WebsiteName : "Bharat Ludo"} is a
+                {WebSitesettings ? WebSitesettings.WebsiteName : "Ludo Bharat"} is a
                 real-money gaming product owned and operated by{" "}
                 {WebSitesettings ? WebSitesettings.CompanyName : " "} ("
                 {WebSitesettings ? WebSitesettings.WebsiteName : " "}" or "We"

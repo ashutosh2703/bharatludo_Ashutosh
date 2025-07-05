@@ -34,6 +34,12 @@ export default function Landing() {
   const [open, setOpen] = useState(false);
   const [userAllData, setUserAllData] = useState();
   const [WebSitesettings, setWebsiteSettings] = useState("");
+  const [showDownloadPopup, setShowDownloadPopup] = useState(true);
+
+  // PWA Download states
+  const [supportsPWA, setSupportsPWA] = useState(false);
+  const [promptInstall, setPromptInstall] = useState(null);
+
   const fetchData = async () => {
     const response = await fetch(baseUrl + "settings/data");
     const data = await response.json();
@@ -70,6 +76,7 @@ export default function Landing() {
     role();
     fetchData();
   }, []);
+
   useEffect(() => {
     const setLink = async () => {
       const data = await axios.get(baseUrl + `get-link`)
@@ -81,22 +88,86 @@ export default function Landing() {
     setLink()
   }, [])
 
+  // PWA Download setup
+  useEffect(() => {
+    const handler = e => {
+      e.preventDefault();
+      console.log("PWA install prompt available");
+      setSupportsPWA(true);
+      setPromptInstall(e);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("transitionend", handler);
+  }, []);
+
   function handleGameClick(game) {
     history.push(`/HomePagegame/Ludogame`, { state: { game } });
-
   }
 
+  const handleDownloadClick = (evt) => {
+    evt.preventDefault();
+    console.log("Download clicked");
+    
+    // Check if PWA installation is supported
+    if (!promptInstall) {
+      // Fallback: redirect to app store or show manual installation instructions
+      if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
+        // iOS users - show instructions for adding to home screen
+        alert('To install this app:\n1. Tap the Share button\n2. Select "Add to Home Screen"');
+      } else if (navigator.userAgent.includes('Android')) {
+        // Android users - try to open app store or show instructions
+        alert('To install this app:\n1. Tap the menu button (⋮)\n2. Select "Add to Home Screen" or "Install App"');
+      } else {
+        // Desktop users
+        alert('To install this app:\n1. Click the install icon in your browser\'s address bar\n2. Or use Ctrl+Shift+A (Chrome) / Cmd+Shift+A (Mac)');
+      }
+      return;
+    }
+    
+    // Trigger PWA installation
+    promptInstall.prompt();
+    
+    // Wait for the user to respond to the prompt
+    promptInstall.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+        setShowDownloadPopup(false); // Hide popup after successful install
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+      setPromptInstall(null);
+    });
+  };
+
+  const closeDownloadPopup = () => {
+    setShowDownloadPopup(false);
+  };
 
   return (
     <>
-
+      <style jsx>{`
+        @keyframes pulse {
+          0% {
+            box-shadow: 0 4px 20px rgba(41, 198, 204, 0.3);
+          }
+          50% {
+            box-shadow: 0 4px 20px rgba(41, 198, 204, 0.6);
+          }
+          100% {
+            box-shadow: 0 4px 20px rgba(41, 198, 204, 0.3);
+          }
+        }
+        
+        .download-popup:hover .close-btn {
+          opacity: 1 !important;
+        }
+      `}</style>
 
       <div className="leftContainer">
-
         <div className="main-area" style={{ paddingTop: "65px" }}>
-
           <div className="header_top_message">
-            <span>Commission: 5% ◉ Referral: 2% For All Games No TDS,No GST</span>
+            <span>Commission: 3% ◉ Referral: 2% For All Games No TDS,No GST</span>
           </div>
 
           {/* <div className="carousel-container" style={{ paddingTop: '35px', margin: "10px" }}>
@@ -152,6 +223,8 @@ export default function Landing() {
               </a>
             </div>
           </div> */}
+          
+
           <div className="note-box">
             {WebSitesettings?.note || (
               <>
@@ -162,11 +235,63 @@ export default function Landing() {
               </>
             )}
           </div>
-
-
+          {/* KYC Verification Banner */}
+          {userAllData?.verified === "unverified" && (
+            <div style={{
+              backgroundColor: '#ffe6e6',
+              border: '2px solid #ff4444',
+              borderRadius: '8px',
+              padding: '15px',
+              margin: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              boxShadow: '0 2px 8px rgba(255, 68, 68, 0.2)'
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+              }}>
+                <div style={{
+                  color: '#ff4444',
+                  fontSize: '20px'
+                }}>
+                  ⚠️
+                </div>
+                <span style={{
+                  color: '#d32f2f',
+                  fontWeight: '600',
+                  fontSize: '14px'
+                }}>
+                  Please Complete Your KYC
+                </span>
+              </div>
+              <Link 
+                to="/kyc2"
+                style={{
+                  backgroundColor: '#ff4444',
+                  color: 'white',
+                  padding: '8px 16px',
+                  borderRadius: '5px',
+                  textDecoration: 'none',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#d32f2f';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#ff4444';
+                }}
+              >
+                Verify Now
+              </Link>
+            </div>
+          )}
 
           <section className="games-section p-3">
-
             <div className="d-flex align-items-center games-section-title">
               Our Games
             </div>
@@ -208,19 +333,12 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  {/* <div className="gameCard-title">
-                    <span className="d-none text-dark d-block text-right">
-                      ◉ Manual Ludo Classic
-                    </span>
-                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-                {/*/Homepage/Ludo%20Classics%20Pro*/}
                 <Link
                   className="gameCard-container"
-                  // to='/yodhaContaxt'
                   to={`/Homepage/Ludo%20Classics%20Pro`}
                 >
                   <span className="d-none blink  d-block text-right" style={{color:"white"}}>
@@ -236,17 +354,10 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  {/* <div className="gameCard-title">
-                    <span className="d-none text-dark d-block text-right">
-                      ◉  Yodha Ludo
-                    </span>
-                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-
-
 
                 <Link
                   className="gameCard-container"
@@ -265,16 +376,10 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  {/* <div className="gameCard-title">
-                    <span className="d-none text-dark d-block text-right">
-                      ◉ KhelBro Ludo
-                    </span>
-                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-                {/*/Homepage/Ludo%20Classics%20Pro*/}
                 <Link
                   className="gameCard-container"
                   onClick={() => {
@@ -294,168 +399,100 @@ export default function Landing() {
                       alt=""
                     />
                   </picture>
-                  {/* <div className="gameCard-title">
-                    <span className="d-none text-dark d-block text-right">
-                      ◉  Ludo Classic
-                    </span>
-                  </div> */}
                   <div className="goverlay">
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-
-
-
-
               </div>
-
             </div>
             <hr></hr>
-
           </section>
           <br /><br />
           <br /><br />
           <br /><br />
-
-          {/* <section className="footer">
-            <div className="footer-divider" />
-            <div className="">
-              <a
-                className="px-3 py-4 d-flex align-items-center"
-                href="#!"
-                style={{ textDecoration: "none" }}
-                onClick={() => setOpen(!open)}
-                aria-controls="example-collapse-text"
-                aria-expanded={open}
-              >
-                <picture className="icon">
-                  <img
-                    src="/Images/LandingPage_img/Header_profile.png"
-                    width="56px"
-                    height="56px"
-                    alt="profile"
-                    style={{ width: "56px", }}
-                  />
-                </picture>
-                <span
-                  style={{
-                    color: "#050505",
-                    fontSize: "1em",
-                    fontWeight: 400,
-                  }}
-                  className={!open ? "d-block" : "d-none"}
-                >
-                  {" "}
-                  Terms, Privacy, Support
-                </span>
-
-                {open ? (
-                  <i
-                    className="mdi mdi-chevron-up ml-auto"
-                    style={{ fontSize: "1.7em", color: "rgb(103, 103, 103)" }}
-                  ></i>
-                ) : (
-                  <i
-                    style={{ fontSize: "1.7em", color: "rgb(103, 103, 103)" }}
-                    className="mdi mdi-chevron-down ml-auto"
-                  ></i>
-                )}
-              </a>
-              <Collapse in={open}>
-                <div id="example-collapse-text" className="px-3 overflow-hidden">
-                  <div className="row footer-links">
-                    <Link className="col-6" to="/term-condition">
-                      Terms &amp; Condition
-                    </Link>
-                    <Link className="col-6" to="/PrivacyPolicy">
-                      Privacy Policy
-                    </Link>
-                    <Link className="col-6" to="/RefundPolicy">
-                      Refund/Cancellation Policy
-                    </Link>
-                    <Link className="col-6" to="/contact-us">
-                      Contact Us
-                    </Link>
-                    <Link className="col-6" to="/responsible-gaming">
-                      Responsible Gaming
-                    </Link>
-                  </div>
-                </div>
-              </Collapse>
-              <hr></hr>
-
-              <div className="footer-divider" style={{marginTop:"2rem"}}/>
-              {/* <div className="px-3 py-4">
-                <div className="footer-text-bold">About Us</div>
-                <br />
-                <div className="footer-text">
-                  {WebSitesettings ? WebSitesettings.WebsiteName : "MaxwayInfotechLudo"} is a
-                  real-money gaming product owned and operated by{" "}
-                  {WebSitesettings ? WebSitesettings.CompanyName : " "} ("
-                  {WebSitesettings ? WebSitesettings.WebsiteName : " "}" or "We"
-                  or "Us" or "Our").
-                </div>
-                <br />
-                <div className="footer-text-bold">
-                  Our Business &amp; Products
-                </div>
-                <br />
-                <div className="footer-text">
-                  We are an HTML5 game-publishing company and our mission is to
-                  make accessing games fast and easy by removing the friction of
-                  app-installs.
-                </div>
-                <br />
-                <div className="footer-text">
-                  {WebSitesettings ? WebSitesettings.WebsiteName : " "} is a
-                  skill-based real-money gaming platform accessible only for our
-                  users in India. It is accessible on{" "}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={WebSitesettings ? WebSitesettings.CompanyWebsite : " "}
-                  >
-                    {WebSitesettings ? WebSitesettings.CompanyWebsite : " "}
-                  </a>
-                  . On {WebSitesettings ? WebSitesettings.WebsiteName : " "},
-                  users can compete for real cash in Tournaments and Battles. They
-                  can encash their winnings via popular options such as Paytm
-                  Wallet, Amazon Pay, Bank Transfer, Mobile Recharges etc.
-                </div>
-                <br />
-                <div className="footer-text-bold">Our Games</div>
-                <br />
-                <div className="footer-text">
-                  {WebSitesettings ? WebSitesettings.WebsiteName : " "} has a
-                  wide-variety of high-quality, premium HTML5 games. Our games are
-                  especially compressed and optimised to work on low-end devices,
-                  uncommon browsers, and patchy internet speeds.
-                </div>
-                <br />
-                <div className="footer-text">
-                  We have games across several popular categories: Arcade, Action,
-                  Adventure, Sports &amp; Racing, Strategy, Puzzle &amp; Logic. We
-                  also have a strong portfolio of multiplayer games such as Ludo,
-                  Chess, 8 Ball Pool, Carrom, Tic Tac Toe, Archery, Quiz, Chinese
-                  Checkers and more! Some of our popular titles are: Escape Run,
-                  Bubble Wipeout, Tower Twist, Cricket , Ludo With Friends. If you
-                  have any suggestions around new games that we should add or if
-                  you are a game developer yourself and want to work with us,
-                  don't hesitate to drop in a line at{" "}
-
-                  !
-                </div>
-              </div> 
-            </div>
-          </section> */}
-          {/* <div className="downloadButton">
-            <Downloadbutton />
-          </div> */}
         </div>
       </div>
-      {/* // <div className='rightContainer'>
-            //     <Rightcontainer/>
-            // </div> */}
+
+      {/* Circular Download Popup */}
+      {showDownloadPopup && (
+        <div 
+          className="download-popup"
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            backgroundColor: '#1a1a1a',
+            border: '2px solid #29C6CC',
+            borderRadius: '50%',
+            width: '60px',
+            height: '60px',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 20px rgba(41, 198, 204, 0.3)',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            animation: 'pulse 2s infinite'
+          }}
+          onClick={handleDownloadClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.1)';
+            e.currentTarget.style.boxShadow = '0 6px 25px rgba(41, 198, 204, 0.5)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(41, 198, 204, 0.3)';
+          }}
+          title="Download Our App"
+        >
+          {/* Download Icon */}
+          <svg 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#29C6CC" 
+            strokeWidth="2"
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7,10 12,15 17,10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+
+          {/* Close button - appears on hover */}
+          <button
+            className="close-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeDownloadPopup();
+            }}
+            style={{
+              position: 'absolute',
+              top: '-5px',
+              right: '-5px',
+              background: '#29C6CC',
+              border: 'none',
+              borderRadius: '50%',
+              color: '#000',
+              fontSize: '12px',
+              cursor: 'pointer',
+              width: '20px',
+              height: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 'bold',
+              opacity: '0',
+              transition: 'opacity 0.3s ease'
+            }}
+          >
+            ×
+          </button>
+        </div>
+      )}
     </>
   );
 }
