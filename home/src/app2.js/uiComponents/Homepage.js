@@ -103,6 +103,18 @@ export default function Homepage({ walletUpdate }) {
           });
           }
       }
+       
+      if(game_type=="Ludo Ulta"){
+          if(Game_Ammount>=50 && Game_Ammount<=50000){
+              nextplay=true;
+          }else{
+          Swal.fire({
+            title: "Amount should be between 50 and 50000!",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
+          }
+      }
       
     const access_token = localStorage.getItem("token");
     const headers = {

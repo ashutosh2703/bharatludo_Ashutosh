@@ -361,7 +361,8 @@ export default function Landing() {
 
                 <Link
                   className="gameCard-container"
-                  onClick={() => { handleGameClick('Owner') }}
+                  to={`/Homepage/Ludo%20Ulta`}
+                  // onClick={() => { handleGameClick('Owner') }}
                 >
                   <span className="d-none blink  d-block text-right" style={{color:"white"}}>
                     ◉ Live
