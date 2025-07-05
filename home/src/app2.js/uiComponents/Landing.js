@@ -419,7 +419,7 @@ export default function Landing() {
           className="download-popup"
           style={{
             position: 'fixed',
-            bottom: '20px',
+            bottom: '50px',
             right: '20px',
             backgroundColor: '#1a1a1a',
             border: '2px solid #29C6CC',

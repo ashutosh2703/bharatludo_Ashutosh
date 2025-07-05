@@ -519,7 +519,7 @@ export default function Login() {
                     <div className="splash-overlay" />
                     <div className="splash-screen animate__bounce infinite">
                         <div className="header_top_message">
-                            <span>Commission: 5% ◉ Referral: 2% For All Games No TDS,No GST</span>
+                            <span>Commission: 3% ◉ Referral: 2% For All Games No TDS,No GST</span>
                         </div>
                         <figure>
                             <img src={loginss} alt="Background" />

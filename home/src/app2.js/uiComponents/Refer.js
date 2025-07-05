@@ -7,6 +7,14 @@ import Swal from 'sweetalert2';
 
 
 const Refer = () => {
+  const beckendLocalApiUrl = process.env.REACT_APP_BACKEND_LOCAL_API;
+  const beckendLiveApiUrl = process.env.REACT_APP_BACKEND_LIVE_API;
+  const nodeMode = process.env.NODE_ENV;
+  if (nodeMode === "development") {
+    var baseUrl = beckendLocalApiUrl;
+  } else {
+    baseUrl = beckendLiveApiUrl;
+  }
 
   const [user, setUser] = useState()
   const Cashheader = () => {
@@ -14,7 +22,7 @@ const Refer = () => {
     const headers = {
       Authorization: `Bearer ${access_token}`
     }
-    axios.get(`https://api.MaxwayInfotechLudo.in/me`, { headers })
+    axios.get(`${baseUrl}me`, { headers })
       .then((res) => {
         setUser(res.data)
         // console.log(res.data);
@@ -32,13 +40,14 @@ const Refer = () => {
     const headers = {
       Authorization: `Bearer ${access_token}`
     }
-    await axios.get(`https://api.MaxwayInfotechLudo.in/referral/code/${id}`, { headers })
+    await axios.get(`${baseUrl}referral/code/${id}`, { headers })
       .then((res) => {
         setGame(res.data)
-console.log(res.data)
-
+        console.log(res.data)
       })
-
+      .catch((e) => {
+        console.log('Error fetching referral data:', e)
+      })
   }
 
   useEffect(() => {
@@ -125,7 +134,7 @@ console.log(res.data)
         <div className="d-flex justify-content-center">
               Total Refers:&nbsp;
               <b>
-               {cardData&&cardData}
+               {cardData && cardData.length}
               </b>
             </div> 
           </div>
@@ -187,6 +196,9 @@ Instant Withdrawal Via UPI/Bank
         </div>
 
       </div>
+      <br style={{background:"fd8a20"}} />
+      <br style={{background:"fd8a20"}} />
+      <br style={{background:"fd8a20"}} />
 
     </div>
   )
