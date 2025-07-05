@@ -339,7 +339,7 @@ export default function Landing() {
                 </Link>
                 <Link
                   className="gameCard-container"
-                  to={`/Homepage/Ludo%20Classics%20Pro`}
+                  to={`/Homepage/Snake%20And%20Ladder`}
                 >
                   <span className="d-none blink  d-block text-right" style={{color:"white"}}>
                     ◉ Live
@@ -361,7 +361,7 @@ export default function Landing() {
 
                 <Link
                   className="gameCard-container"
-                  to={`/Homepage/Ludo%20Ulta`}
+                  to={`/Homepage/Ludo%20Bharat`}
                   // onClick={() => { handleGameClick('Owner') }}
                 >
                   <span className="d-none blink  d-block text-right" style={{color:"white"}}>

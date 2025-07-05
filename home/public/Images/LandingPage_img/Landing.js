@@ -274,10 +274,10 @@ export default function Landing() {
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-                {/*/Homepage/Ludo%20Classics%20Pro*/}
+                {/*/Homepage/Snake%20And%20Ladder*/}
                 <Link
                   className="gameCard-container"
-                  // to={`/Homepage/Ludo%20Classics%20Pro`}
+                  // to={`/Homepage/Snake%20And%20Ladder`}
                 >
                   <span className="d-none blink text-primary d-block text-right">
                     ◉ Comming soon
@@ -330,7 +330,7 @@ export default function Landing() {
                     <div className="text">Comming Soon</div>
                   </div>
                 </Link>
-                {/*/Homepage/Ludo%20Classics%20Pro*/}
+                {/*/Homepage/Snake%20And%20Ladder*/}
                 <Link
                   className="gameCard-container"
                   to={`#`}
@@ -403,7 +403,7 @@ export default function Landing() {
                                         </div>
                                     </Link> */}
 
-                {/* <Link className="gameCard-container" to={`/Homepage/Ludo%20Ulta`} > */}
+                {/* <Link className="gameCard-container" to={`/Homepage/Ludo%20Bharat`} > */}
                 {/* <Link className="gameCard-container" to={``} >
                                         <span className="d-none blink text-danger d-block text-right">◉ LIVE</span>
                                         <picture className="gameCard-image">
@@ -411,7 +411,7 @@ export default function Landing() {
 
                                         </picture>
                                         <div className="gameCard-title">
-                                            <span className="d-none blink text-success d-block text-right">◉ Ludo Ulta </span>
+                                            <span className="d-none blink text-success d-block text-right">◉ Ludo Bharat </span>
 
                                         </div>
 

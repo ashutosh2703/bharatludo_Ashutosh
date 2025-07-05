@@ -92,7 +92,7 @@ export default function Homepage({ walletUpdate }) {
           });
           }
       }
-      if(game_type=="Ludo Classics Pro"){
+      if(game_type=="Snake And Ladder"){
           if(Game_Ammount>=50 && Game_Ammount<=50000){
               nextplay=true;
           }else{
@@ -104,7 +104,7 @@ export default function Homepage({ walletUpdate }) {
           }
       }
        
-      if(game_type=="Ludo Ulta"){
+      if(game_type=="Ludo Bharat"){
           if(Game_Ammount>=50 && Game_Ammount<=50000){
               nextplay=true;
           }else{
@@ -758,8 +758,8 @@ if(nextplay)
   const getPost = async (Id) => {
     if (
       game_type === "Ludo Classics Lite" ||
-      game_type === "Ludo Classics Pro" ||
-      game_type === "Ludo Ulta"
+      game_type === "Snake And Ladder" ||
+      game_type === "Ludo Bharat"
     ) {
       socket.emit("roomCode", { game_id: Id, status: "running" });
     } else if (game_type === "Ludo Popular") {

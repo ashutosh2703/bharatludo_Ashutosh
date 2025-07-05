@@ -204,7 +204,7 @@ function Views() {
     if(game.Game_type=="Ludo Classics"){
         gameBgImage = 'url(/ludoclassic.jpg)';
     }
-    else if(game.Game_type == "Ludo Ulta"){
+    else if(game.Game_type == "Ludo Bharat"){
         gameBgImage = 'url(/ludoultra.jpg)';
     }
     else if(game.Game_type == "Ludo Popular"){

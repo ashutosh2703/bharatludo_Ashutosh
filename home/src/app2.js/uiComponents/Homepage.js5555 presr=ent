@@ -703,7 +703,7 @@ useEffect(() => {
   // const [roomCode, setRoomCode] = useState()
 
   const getPost = async (Id) => {
-    if (game_type === 'Ludo Classics' || game_type === 'Ludo 1 Goti' || game_type === 'Ludo Ulta') {
+    if (game_type === 'Ludo Classics' || game_type === 'Ludo 1 Goti' || game_type === 'Ludo Bharat') {
       socket.emit('roomCode', { game_id: Id, status: 'running' })
       
     }
